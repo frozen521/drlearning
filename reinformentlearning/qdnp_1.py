@@ -1,12 +1,13 @@
 # import lib
-import gym,os
+import gym, os
 import tensorflow as tf
 import numpy as np
 
-os.environ["TF_CPP_MIN_LOG_LEVEL"]='2' # 只显示 warning 和 Error
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'  # 只显示 warning 和 Error
 
 # Create the Cart-Pole game environment
 env = gym.make('CartPole-v0')
+
 
 # Q-network
 class QNetwork:
@@ -40,10 +41,13 @@ class QNetwork:
             self.loss = tf.reduce_mean(tf.square(self.targetQs_ - self.Q))
             self.opt = tf.train.AdamOptimizer(learning_rate).minimize(self.loss)
 
+
 # Experience replay
 from collections import deque
+
+
 class Memory():
-    def __init__(self, max_size = 1000):
+    def __init__(self, max_size=1000):
         self.buffer = deque(maxlen=max_size)
 
     def add(self, experience):
@@ -55,24 +59,25 @@ class Memory():
                                replace=False)
         return [self.buffer[ii] for ii in idx]
 
+
 # hyperparameters
-train_episodes = 1000          # max number of episodes to learn from
-max_steps = 200                # max steps in an episode
-gamma = 0.99                   # future reward discount
+train_episodes = 1000  # max number of episodes to learn from
+max_steps = 200  # max steps in an episode
+gamma = 0.99  # future reward discount
 
 # Exploration parameters
-explore_start = 1.0            # exploration probability at start
-explore_stop = 0.01            # minimum exploration probability
-decay_rate = 0.0001            # exponential decay rate for exploration prob
+explore_start = 1.0  # exploration probability at start
+explore_stop = 0.01  # minimum exploration probability
+decay_rate = 0.0001  # exponential decay rate for exploration prob
 
 # Network parameters
-hidden_size = 64               # number of units in each Q-network hidden layer
-learning_rate = 0.0001         # Q-network learning rate
+hidden_size = 64  # number of units in each Q-network hidden layer
+learning_rate = 0.0001  # Q-network learning rate
 
 # Memory parameters
-memory_size = 10000            # memory capacity
-batch_size = 20                # experience mini-batch size
-pretrain_length = batch_size   # number experiences to pretrain the memory
+memory_size = 10000  # memory capacity
+batch_size = 20  # experience mini-batch size
+pretrain_length = batch_size  # number experiences to pretrain the memory
 
 tf.reset_default_graph()
 mainQN = QNetwork(name='main', hidden_size=hidden_size, learning_rate=learning_rate)
@@ -127,7 +132,7 @@ with tf.Session() as sess:
             env.render()
 
             # Explore or Exploit
-            explore_p = explore_stop + (explore_start - explore_stop)*np.exp(-decay_rate*step)
+            explore_p = explore_stop + (explore_start - explore_stop) * np.exp(-decay_rate * step)
             if explore_p > np.random.rand():
                 # Make a random action
                 action = env.action_space.sample()
@@ -184,9 +189,9 @@ with tf.Session() as sess:
             targets = rewards + gamma * np.max(target_Qs, axis=1)
 
             loss, _ = sess.run([mainQN.loss, mainQN.opt],
-                                feed_dict={mainQN.inputs_: states,
-                                           mainQN.targetQs_: targets,
-                                           mainQN.actions_: actions})
+                               feed_dict={mainQN.inputs_: states,
+                                          mainQN.targetQs_: targets,
+                                          mainQN.actions_: actions})
 
     saver.save(sess, "checkpoints/cartpole.ckpt")
 
