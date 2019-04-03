@@ -1,6 +1,6 @@
 # import lib
 import gym, os
-import tensorflow as tf
+import tensorflo as tf
 import numpy as np
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'  # 只显示 warning 和 Error
