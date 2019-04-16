@@ -57,7 +57,7 @@ for i_episode in range(3000):
             if running_reward > DISPLAY_REWARD_THRESHOLD: RENDER = True     # rendering
             print("episode:", i_episode, "  reward:", int(running_reward))
 
-            vt = RL.learn()
+            vt = RL.drlearn()
 
             if i_episode == 0:
                 plt.plot(vt)    # plot the episode vt

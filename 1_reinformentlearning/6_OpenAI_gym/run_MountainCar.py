@@ -44,7 +44,7 @@ for i_episode in range(10):
         RL.store_transition(observation, action, reward, observation_)
 
         if total_steps > 1000:
-            RL.learn()
+            RL.drlearn()
 
         ep_r += reward
         if done:

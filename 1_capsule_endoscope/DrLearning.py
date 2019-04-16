@@ -15,18 +15,22 @@ import pandas as pd
 class QLearningTable:
     def __init__(
             self,
-            n_actions,
-            n_features,
+            actions,
+            features,
+            cap_length,
+            e_current,
             learning_rate=0.01,
             reward_decay=0.9,
             e_greedy=0.9,
             replace_target_iter=300,
             memory_size=500,
             batch_size=32,
-            e_greedy_increment=None
+            e_greedy_increment=None, q_table=None
     ):
-        self.n_actions = n_actions
-        self.n_features = n_features
+        self.actions = actions
+        self.features = features
+        self.cap_length = cap_length
+        self.e_current = e_current
         self.lr = learning_rate
         self.gamma = reward_decay
         self.epsilon_max = e_greedy
@@ -40,9 +44,10 @@ class QLearningTable:
         self.learn_step_counter = 0
 
         # initialize zero memory [s, a, r, s_]
-        self.memory = np.zeros((self.memory_size, n_features * 2 + 2))
+        self.memory = np.zeros((self.memory_size, features * 2 + 2))
+        self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)  # 初始 q_table
 
-    def learn(self, s, a, r, s_):
+    def drlearn(self, s, a, r, s_):
         self.check_state_exist(s_)
         q_predict = self.q_table.loc[s, a]
         if s_ != 'terminal':

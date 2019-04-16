@@ -53,7 +53,7 @@ def train(RL):
             RL.store_transition(observation, action, reward, observation_)
 
             if total_steps > MEMORY_SIZE:
-                RL.learn()
+                RL.drlearn()
 
             if done:
                 print('episode ', i_episode, ' finished')

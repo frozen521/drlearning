@@ -48,7 +48,7 @@ for i_episode in range(100):
 
         ep_r += reward
         if total_steps > 1000:
-            RL.learn()
+            RL.drlearn()
 
         if done:
             print('episode: ', i_episode,

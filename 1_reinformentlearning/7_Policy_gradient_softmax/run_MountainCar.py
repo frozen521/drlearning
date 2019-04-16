@@ -63,7 +63,7 @@ for i_episode in range(1000):
 
             print("episode:", i_episode, "  reward:", int(running_reward))
 
-            vt = RL.learn()  # train
+            vt = RL.drlearn()  # train
 
             if i_episode == 30:
                 plt.plot(vt)  # plot the episode vt

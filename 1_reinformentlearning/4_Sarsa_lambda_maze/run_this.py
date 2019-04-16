@@ -33,7 +33,7 @@ def update():
             action_ = RL.choose_action(str(observation_))
 
             # RL learn from this transition (s, a, r, s, a) ==> Sarsa
-            RL.learn(str(observation), action, reward, str(observation_), action_)
+            RL.drlearn(str(observation), action, reward, str(observation_), action_)
 
             # swap observation and action
             observation = observation_
