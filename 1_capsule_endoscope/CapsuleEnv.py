@@ -5,14 +5,10 @@
 @author: YangZhengqian
 @contact: xx@xx.com
 @software: PyCharm
-@file: drlearningcore.py
+@file: CapsuleEnv.py
 @time: 2019/4/16 16:44
 """
 
-
-def main():
-    pass
-
-
-if __name__ == "__main__":
-    main()
+class CapsuleEnv:
+    def __init__(self):
+        self.width=23;
