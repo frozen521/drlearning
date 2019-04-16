@@ -8,7 +8,9 @@
 @file: CapsuleEnv.py
 @time: 2019/4/16 16:44
 """
-
+import tkinter as tk
+import time
+import sys
 class CapsuleEnv:
     def __init__(self):
-        self.width=23;
+        self.width=23
