@@ -1,6 +1,6 @@
 import csv
 import numpy as np
-import tkinter
+import tkintertutor
 
 def readData():
     X = []
