@@ -14,7 +14,7 @@ np.random.seed(2)  # reproducible
 
 
 N_STATES = 6   # the length of the 1 dimensional world
-ACTIONS = ['left', 'right']     # available actions
+ACTIONS = ['left', 'right','up','down']     # available actions
 EPSILON = 0.9   # greedy police
 ALPHA = 0.1     # learning rate
 GAMMA = 0.9    # discount factor
@@ -50,7 +50,19 @@ def get_env_feedback(S, A):
         else:
             S_ = S + 1
             R = 0
-    else:   # move left
+    elif A=='left':   # move left
+        R = 0
+        if S == 0:
+            S_ = S  # reach the wall
+        else:
+            S_ = S - 1
+    elif A=='up':
+        R = 0
+        if S == 0:
+            S_ = S  # reach the wall
+        else:
+            S_ = S - 1
+    else :
         R = 0
         if S == 0:
             S_ = S  # reach the wall
