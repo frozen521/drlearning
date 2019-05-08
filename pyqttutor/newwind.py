@@ -1,4 +1,4 @@
-from test import Ui_MainWindow
+from pyqttutor.test import Ui_MainWindow
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 

@@ -32,7 +32,7 @@ def hit_me():
 
 def printpoint():
     v=lb.get(lb.curselection())
-    l.config(text='you are fol',+var.get())
+    l.config(text='you are fol')
     var.set(v)
 
 b1 = tk.Button(window, text='insertpoint', width=15,
