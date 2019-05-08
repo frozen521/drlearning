@@ -7,15 +7,19 @@ import tkinter as tk
 
 window = tk.Tk()
 window.title('my window')
-window.geometry('200x100')
+window.geometry('800x600')
 
 var = tk.StringVar()
 l = tk.Label(window, textvariable=var, bg='green', font=('Arial', 12), width=15,
              height=2)
-#l = tk.Label(window, text='OMG! this is TK!', bg='green', font=('Arial', 12), width=15, height=2)
+# l = tk.Label(window, text='OMG! this is TK!', bg='green', font=('Arial', 12), width=15, height=2)
 l.pack()
-
+e = tk.Entry(window, show="^")
+e.pack()
 on_hit = False
+t = tk.Text(window, height=3)
+
+t.pack()
 def hit_me():
     global on_hit
     if on_hit == False:
@@ -25,9 +29,20 @@ def hit_me():
         on_hit = False
         var.set('')
 
-b = tk.Button(window, text='hit me', width=15,
-              height=2, command=hit_me)
-b.pack()
 
+def printpoint():
+    v=lb.get(lb.curselection())
+    l.config(text='you are fol',+var.get())
+    var.set(v)
 
+b1 = tk.Button(window, text='insertpoint', width=15,
+               height=2, command=printpoint)
+b1.pack()
+var2=tk.StringVar()
+var2.set((12,34,56,78))
+lb=tk.Listbox(window,listvariable=var2)
+listitems=[1,2,3,4]
+for er in listitems:
+    lb.insert('end',er)
+lb.pack()
 window.mainloop()
